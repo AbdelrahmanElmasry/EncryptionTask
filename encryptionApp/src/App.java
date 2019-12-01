@@ -19,6 +19,7 @@ public class App {
 
     static  MatrixEncryptionAlgorithm matrix = new MatrixEncryptionAlgorithm();
     static  ShiftEncryptionAlgorithm shift = new ShiftEncryptionAlgorithm();
+    static InverseAlgorithm inverse = new InverseAlgorithm();
     static TextEncryption Encryption;
 
     public static void main(String[] args){
@@ -29,6 +30,7 @@ public class App {
         String text = scanner.nextLine();
         System.out.println("\n1-Shift Algorithm");
         System.out.println("2-Matrix Encryption Algorithm");
+        System.out.println("3-Inverse\n");
         System.out.println("Choose Algorithm number then press Enter..");
         try {
             int algChoise = scanner.nextInt();
@@ -47,7 +49,9 @@ public class App {
                 case 2:
                     Encryption = new TextEncryption(matrix);
                     break;
-
+                case 3:
+                    Encryption = new TextEncryption(inverse);
+                    break;
             }
             if (method == 1) {
                 System.out.println("Encrypted text : " + Encryption.Encrypte(text));
