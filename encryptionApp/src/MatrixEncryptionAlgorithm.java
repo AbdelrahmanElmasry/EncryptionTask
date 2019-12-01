@@ -2,7 +2,6 @@
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 /**
  * Implementation of Matrix encryption algorithm using
