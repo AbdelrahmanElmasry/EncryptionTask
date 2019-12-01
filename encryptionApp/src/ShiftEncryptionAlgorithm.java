@@ -63,6 +63,51 @@ public class ShiftEncryptionAlgorithm  implements Encryptable{
         return this.encryptedText;
     }
 
+    /**
+     * This method perofrm the core for the decryption process
+     *
+     * @param plaintext     encrypted text from the user
+     * @return String       Original Text
+     */
+    @Override
+    public String decrypte(String text) {
+
+        this.length = text.length();
+        this.encryptedText = "";
+
+        for(int i=0;i< this.length;i++){
+            char ch = text.charAt(i);
+            //Check for letter/Non-letter
+            if(Character.isLetter(ch)){
+
+                if(Character.isLowerCase(ch)){
+                    char c = (char)(ch-this.shift);
+
+                    // exceeds the lower bound of the ASCII code
+                    if(c < 'a'){
+                        this.encryptedText += (char)(ch + (26 - this.shift));
+                    }else{
+                        this.encryptedText += c;
+                    }
+
+                }else if(Character.isUpperCase(ch)){
+                    char c = (char)(ch-this.shift);
+                    // exceeds the lower bound of the ASCII code
+                    if(c < 'A'){
+                        this.encryptedText += (char)(ch + (26 - this.shift));
+                    }else{
+                        this.encryptedText += c;
+                    }
+                }
+                //Catch the Space
+            }else if(ch == ' '){
+                this.encryptedText += ch;
+            }
+
+        }
+        return this.encryptedText;
+    }
+
 
 
 

@@ -314,7 +314,75 @@ public class MatrixEncryptionAlgorithm implements Encryptable {
         return binaryOfMatrix.toString();
     }
 
+    /**
+     * This method build a list of matrices from the list of encrypted text
+     *
+     * @param //List     list of encrypted text
+     * @return List   characters for each ASCII code
+     */
+    private List<double[][]> getMatrixfromEncryptedText(List<String> textList){
+        for(int i = 0 ; i < textList.size();i++){
+            this.encodedMatrixList.add(getdecrypteMatrix(textList.get(i)));
+        }
+        return  this.encodedMatrixList;
+    }
 
+
+
+    /**
+     * This method build a list of String from the list of encrypted text , slice every 16 character
+     *
+     * @param encodedText     encryptedText
+     * @return List   List of the encrypted Text
+     */
+    private List<String> getListForEncodedText(String encodedText){
+        char letter;
+        encodedTextList = new ArrayList<>();
+        String oneElement = "";
+
+        for(int i = 1 ; i <= encodedText.length();i++){
+            letter = encodedText.charAt(i-1);
+            if( i % 16 == 0 && i > 0){
+                oneElement += letter;
+                this.encodedTextList.add(oneElement);
+                oneElement = "";
+            }else{
+                oneElement+= letter;
+            }
+        }
+
+        return encodedTextList;
+    }
+
+
+    /**
+     * This method perform the decryption process core
+     *
+     * @param //encoded_Text     encryptedText
+     * @return String   decodedText ( original )
+     */
+    @Override
+    public String decrypte(String text){
+
+        String decodeText = "";
+        MatrixList = new ArrayList<>();
+        encodedMatrixList = new ArrayList<>();
+
+        binaryTxtList = new String[text.length()];
+        doubleMatrix = new double[binaryTxtList.length];
+
+        //build a list of matrices from the list of encrypted text and assign to class variable ( encodedMatrixList )
+        getMatrixfromEncryptedText(getListForEncodedText(text));
+
+        for(int i=0;i < this.encodedMatrixList.size();i++){
+            //Debug Purpose
+            //System.out.println(Arrays.deepToString(this.encodedMatrixList.get(i)));
+            this.MatrixList.add(multiplyEncodedMatrices(this.encodedMatrixList.get(i),this.inverseMatrix));
+            decodeText += (char) Integer.parseInt(getNumberfromBinary(this.MatrixList.get(i)),2);
+        }
+
+        return decodeText ;
+    }
 
 
 
