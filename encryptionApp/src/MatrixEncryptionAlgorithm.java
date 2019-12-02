@@ -1,4 +1,3 @@
-import org.apache.commons.lang.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -188,8 +187,10 @@ public class MatrixEncryptionAlgorithm implements Encryptable {
      */
     private String getStringBinary(char letter){
         int aschiiNumber = letter;
-        System.out.print(aschiiNumber+" - "+StringUtils.leftPad(Integer.toBinaryString(aschiiNumber),16,'0'));
-        return StringUtils.leftPad(Integer.toBinaryString(aschiiNumber),16,'0');
+        String binary = Integer.toBinaryString(aschiiNumber);
+        //Debug purpose
+        //System.out.println(aschiiNumber+" - "+"0000000000000000".substring(binary.length())+binary);
+        return "0000000000000000".substring(binary.length())+binary;
 
     }
 
