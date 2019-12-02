@@ -13,4 +13,4 @@ you need docker to build the container image from the DockerFile
 
 # Running the container
 run from your terminal
-docker run -i <image-name>
+  ==> docker run -i -t <image-name>
